@@ -1,7 +1,7 @@
 # FSA Ratings App
 
-This repository contains the source code for a web app which gives to user the ability to choose from a list of local UK authorities and 
-see a table which dsiplays the distribution of ratings for all establishments in a specified authority.
+This repository contains the source code for a web app which gives to user the ability to choose from a list of local UK authorities and, 
+when one is chosen, see a table which displays the distribution of ratings for all establishments in that authority.
 
 This app was created in response to a technical test I received a while ago. I took it on as a mini project.
 
