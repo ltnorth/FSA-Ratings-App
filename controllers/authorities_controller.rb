@@ -19,15 +19,18 @@ class AuthoritiesController < Sinatra::Base
     id = params[:id]
     authority = Authority.find(id)
     @authority_name = authority.shift
-    @establishment_count = authority.shift
+    est_total = authority.shift
+    @establishment_count = est_total
     if authority.count("Pass") > 0
+      puts "you're in scotland"
       @ratings = ["Pass", "Pass and Eat Safe", "Improvement Required", "Exempt"]
-      @ratios = @ratings.map! { |rating| (authority.count(rating) / @establishment_count.to_i) if authority.count(rating) != 0}
+      @ratios = @ratings.map! { |rating| (authority.count(rating) / est_total.to_i) if authority.count(rating) != 0}
     else
+      puts "you're elsewhere"
       @ratings = ["5", "4", "3", "2", "1", "Exempt"]
-      @ratios = @ratings.map! { |rating| (authority.count(rating) / @establishment_count.to_i) if authority.count(rating) != 0}
+      @ratios = @ratings.map! { |rating| (authority.count(rating) / est_total.to_i) if authority.count(rating) != 0}
     end
-      erb :'show'
+    erb :'show'
   end
   
 end

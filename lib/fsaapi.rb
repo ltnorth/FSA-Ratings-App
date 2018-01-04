@@ -30,12 +30,14 @@ class FsaApiCall
     all_authority_info.search('WebLocalAuthorityAPI').each do |authority|
       authority_filename = authority.xpath('FileName').text if authority.xpath('LocalAuthorityId').text == id
     end
-    for_uri(authority_filename) do
-      authority_info = Nokogiri::XML(self.class.get("").body)
-      details_of_authority << authority_info.search('LocalAuthorityName')[0].text
-      details_of_authority << authority_info.search('ItemCount').text
-      authority_info.search('RatingValue').each do |value|
-        details_of_authority << value.text
+    unless authority_filename.empty?
+      for_uri(authority_filename) do
+        authority_info = Nokogiri::XML(self.class.get("").body)
+        details_of_authority << authority_info.search('LocalAuthorityName')[0].text
+        details_of_authority << authority_info.search('ItemCount').text
+        authority_info.search('RatingValue').each do |value|
+          details_of_authority << value.text
+        end
       end
     end
     details_of_authority
