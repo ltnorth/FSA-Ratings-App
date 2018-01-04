@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title><%= @authority_name %></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="../assets/style.css" />
+    <script src="../assets/app.js"></script>
+</head>
+
+<body>
+  <h1><%= @authority_name %></h1>
+
+  <h3><%= @authority_name %> has <%= @establishment_count %> establishments and here is how their ratings are distributed:</h3>
+  
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Rating</th>
+        <th scope="col">Ratio</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @ratings.each_with_index do |rating, i| %>
+        <tr class="row">
+          <td><%= rating %></td>
+          <td><%= @ratios[i] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+</body>
+
+</html>
