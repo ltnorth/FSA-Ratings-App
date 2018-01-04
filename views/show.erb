@@ -1,40 +1,24 @@
-<!DOCTYPE html>
-<html>
+<div class="show-space"></div>
+<h1><%= @authority_name %></h1>
 
-<head>
-  <title><%= @authority_name %></title>
-  <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-  <script src="/javascript/app.js"></script>
-  <link rel="stylesheet" type="text/css" media="screen" href="/css/style.css" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
+<h3><%= @authority_name %> has <%= @establishment_count %> establishments and here is how their ratings are distributed:</h3>
 
-<body>
-  <h1><%= @authority_name %></h1>
-
-  <h3><%= @authority_name %> has <%= @establishment_count %> establishments and here is how their ratings are distributed:</h3>
-  
-  <div>
-    <table class="table">
-      <thead class="thead-dark">
+<div>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Rating</th>
+        <th scope="col">Percentage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @ratings.each_with_index do |rating, i| %>
         <tr>
-          <th scope="col">Rating</th>
-          <th scope="col">Percentage</th>
+          <td scope="row"><%= rating %></td>
+          <td><%= @ratios[i] %>%</td>
         </tr>
-      </thead>
-      <tbody>
-        <% @ratings.each_with_index do |rating, i| %>
-          <tr>
-            <td scope="row"><%= rating %></td>
-            <td><%= @ratios[i] %>%</td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-  <form action="/"><input type="submit" value="Back to home" /></form>
-  
-</body>
-
-</html>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<form action="/"><input type="submit" value="Back to home" /></form>

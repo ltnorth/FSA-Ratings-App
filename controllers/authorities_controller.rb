@@ -11,6 +11,7 @@ class AuthoritiesController < Sinatra::Base
   end
 
   get '/' do
+    @title = "FSA Ratings"
     @authorities = Authority.all
     erb :'index'
   end
@@ -20,6 +21,7 @@ class AuthoritiesController < Sinatra::Base
     redirect '/' if id < 1 || id > 408
     authority = Authority.find(id.to_s)
     @authority_name = authority.shift
+    @title = @authority_name
     est_total = authority.shift
     @establishment_count = est_total
     if authority.count("Pass") > 0
