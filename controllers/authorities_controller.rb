@@ -16,18 +16,18 @@ class AuthoritiesController < Sinatra::Base
   end
 
   get '/:id' do
-    id = params[:id]
-    authority = Authority.find(id)
+    id = params[:id].to_i
+    redirect '/' if id < 1 || id > 408
+    authority = Authority.find(id.to_s)
     @authority_name = authority.shift
     est_total = authority.shift
     @establishment_count = est_total
     if authority.count("Pass") > 0
       @ratings = ["Pass", "Pass and Eat Safe", "Improvement Required", "Exempt"]
-      @ratios = @ratings.map { |rating| (authority.count(rating) / est_total.to_i) if authority.count(rating) != 0}
     else
       @ratings = ["5", "4", "3", "2", "1", "Exempt"]
-      @ratios = @ratings.map { |rating| (authority.count(rating) / est_total.to_i) if authority.count(rating) != 0}
     end
+    @ratios = @ratings.map { |rating| ((authority.count(rating).to_f/est_total.to_f).round(3)*100).to_s[0..3].to_f if authority.count(rating) != 0 }
     erb :'show'
   end
   

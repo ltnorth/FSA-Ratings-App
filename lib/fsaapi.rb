@@ -43,3 +43,4 @@ class FsaApiCall
     details_of_authority
   end
 end
+
